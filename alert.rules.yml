@@ -1,0 +1,22 @@
+groups:
+  - name: general-alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 70
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: |
+            CPU usage is above 70% for more than 2 minutes.
+            Current value: {{ $value | printf "%.2f" }}%
+
+      - alert: AppDown
+        expr: up{job="app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "App target down"
+          description: "The demo app scrape target is down for > 1m."

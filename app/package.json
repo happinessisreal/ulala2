@@ -1,0 +1,15 @@
+{
+  "name": "demo-metrics-app",
+  "version": "1.0.0",
+  "description": "Demo web service exposing Prometheus /metrics with mock values",
+  "main": "app.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "prom-client": "^15.1.3"
+  }
+}
